@@ -96,12 +96,12 @@ WSGI_APPLICATION = 'health.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'GDG_HACKATHON',
-        'USER': 'health2021',
-        'PASSWORD': 'Gogo2021!',
-        'HOST': 'hackaton2021.cm3zr0gsnb4z.ap-northeast-2.rds.amazonaws.com',
-        'PORT': '3306'
+        'ENGINE': get_secret("DB_ENGINE"),
+        'NAME': get_secret("DB_NAME"),
+        'USER': get_secret("DB_USER"),
+        'PASSWORD': get_secret("DB_PASSWORD"),
+        'HOST': get_secret("DB_HOST"),
+        'PORT': get_secret("DB_PORT"),
     }
 }
 
