@@ -11,4 +11,4 @@ class FitnessSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Fitness
-        fields = ["id", "name", "navigation", "location", "category"]
+        fields = ["id", "name", "image", "navigation", "location", "category"]
