@@ -58,6 +58,28 @@ class MembershipViewSet(viewsets.ModelViewSet):
         }
         return Response(content)
 
+    @action(detail=True, methods=['POST'])
+    def like(self, request, pk=None):
+        membership = self.get_object()
+
+        user = self.request.user
+        if membership in user.favorites.all():
+            user.favorites.remove(membership)
+            user.save()
+            content = {
+                "message": "좋아요를 취소했습니다."
+            }
+            return Response(content)
+
+        user.favorites.add(membership)
+        user.save()
+
+        content = {
+            "message": "좋아요를 추가했습니다."
+        }
+
+        return Response(content)
+
 
 class MyMembershipView(APIView):
     permission_classes = [IsAuthenticated]

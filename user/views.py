@@ -40,3 +40,15 @@ class MyPurchaseView(APIView):
 
         serializer = MyMembershipSerializer(my_purchases, many=True)
         return Response(serializer.data)
+
+
+class MyFavoriteView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        user = self.request.user
+
+        my_favorites = user.favorites.all()
+
+        serializer = MyMembershipSerializer(my_favorites, many=True)
+        return Response(serializer.data)

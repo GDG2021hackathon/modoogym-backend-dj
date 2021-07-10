@@ -43,6 +43,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_superuser = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
     cash = models.IntegerField(default=0)
+    favorites = models.ManyToManyField("membership.Membership", default=None)
     date_joined = models.DateTimeField(auto_now_add=True)
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['nickname']
