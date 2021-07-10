@@ -37,13 +37,13 @@ def naver_login(request):
     )
 
 
-@api_view(['GET'])
+@api_view(['POST'])
 def naver_callback(request):
     try:
         naver_client_id = getattr(settings, 'NAVER_CLIENT_ID', None)
         naver_client_secret = getattr(settings, 'NAVER_CLIENT_SECRET', None)
-        user_token = request.GET.get("code")
-        state = request.GET.get("state")
+        user_token = request.data.get("code")
+        state = request.data.get("state", "")
         # post request
         token_request = requests.get(
             f"https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id={naver_client_id}&client_secret={naver_client_secret}&code={user_token}&state={state}"
