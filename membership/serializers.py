@@ -30,18 +30,8 @@ class MembershipSerializer(serializers.ModelSerializer):
 
 class MyMembershipSerializer(serializers.ModelSerializer):
     fitness_name = serializers.CharField(source="fitness.name", read_only=True)
-    like = serializers.SerializerMethodField()
 
     class Meta:
         model = Membership
-        fields = ["id", "title", "price", "validation", "end_date", "like", "description", "fitness", "fitness_name"]
+        fields = ["id", "title", "price", "validation", "end_date", "description", "fitness", "fitness_name"]
         read_only_fields = ["validation"]
-
-    def get_like(self, membership):
-        user = self.context.get('request').user
-        if user.is_anonymous:
-            return False
-        if membership in self.context.get('request').user.favorites.all():
-            return True
-        else:
-            return False
