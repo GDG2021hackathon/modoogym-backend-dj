@@ -17,5 +17,5 @@ class MyMembershipSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Membership
-        fields = ["id", "price", "validation", "end_date", "description", "fitness", "fitness_name", "seller"]
-        read_only_fields = ["seller", "validation"]
+        fields = ["id", "price", "validation", "end_date", "description", "fitness", "fitness_name"]
+        read_only_fields = ["validation"]
