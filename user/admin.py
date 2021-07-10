@@ -9,6 +9,7 @@ class UserAdmin(admin.ModelAdmin):
     list_display = (
         'nickname',
         'email',
+        'cash',
         'date_joined',
     )
 
