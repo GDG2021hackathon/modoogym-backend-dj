@@ -71,6 +71,7 @@ INSTALLED_APPS = [
     "category",
     "location",
     "user",
+    "membership",
 ]
 
 MIDDLEWARE = [
@@ -173,4 +174,15 @@ JWT_AUTH = {
 }
 REST_AUTH_SERIALIZERS = {
     'USER_DETAILS_SERIALIZER': 'auth.serializers.MyUserDetailsSerializer',
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ),
+
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+    ),
 }

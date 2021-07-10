@@ -25,4 +25,5 @@ urlpatterns = [
     path("locations/", include("location.urls")),
     path("categories/", include("category.urls")),
     path("fitnesses/", include("fitness.urls")),
+    path("memberships/", include("membership.urls")),
 ]
