@@ -64,7 +64,7 @@ class MyMembershipView(APIView):
 
     def get(self, request):
         user = self.request.user
-        my_membership = Membership.objects.filter(user=user).order_by("-validation")
+        my_membership = Membership.objects.filter(seller=user).order_by("-validation")
 
         serializer = MyMembershipSerializer(my_membership, many=True)
 
