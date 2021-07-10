@@ -60,6 +60,8 @@ class MembershipViewSet(viewsets.ModelViewSet):
 
     @action(detail=True, methods=['POST'])
     def like(self, request, pk=None):
+        self.permission_classes = [IsAuthenticated]
+
         membership = self.get_object()
 
         user = self.request.user
