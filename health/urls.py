@@ -22,7 +22,9 @@ urlpatterns = [
     path("", IndexView.as_view()),
     path('admin/', admin.site.urls),
     path("auth/", include("auth.urls")),
+    path("users/", include("user.urls")),
     path("locations/", include("location.urls")),
     path("categories/", include("category.urls")),
     path("fitnesses/", include("fitness.urls")),
+    path("memberships/", include("membership.urls")),
 ]
