@@ -5,14 +5,14 @@ from .models import Membership
 
 
 class MembershipSerializer(serializers.ModelSerializer):
-    fitness_name = serializers.CharField(source="fitness.name", read_only=True)
+    name = serializers.CharField(source="fitness.name", read_only=True)
     seller_nickname = serializers.CharField(source="seller.nickname", read_only=True)
     image = serializers.SerializerMethodField()
     like = serializers.SerializerMethodField()
 
     class Meta:
         model = Membership
-        fields = ["id", "title", "price", "end_date", "description", "image", "like", "fitness", "fitness_name",
+        fields = ["id", "title", "price", "end_date", "description", "image", "like", "fitness", "name",
                   "seller", "seller_nickname"]
         read_only_fields = ["seller"]
 
@@ -30,13 +30,13 @@ class MembershipSerializer(serializers.ModelSerializer):
 
 
 class MyMembershipSerializer(serializers.ModelSerializer):
-    fitness_name = serializers.CharField(source="fitness.name", read_only=True)
+    name = serializers.CharField(source="fitness.name", read_only=True)
     location = LocationSerializer(source="fitness.location", read_only=True)
     image = serializers.SerializerMethodField()
 
     class Meta:
         model = Membership
-        fields = ["id", "title", "price", "validation", "end_date", "description", "image", "fitness", "fitness_name",
+        fields = ["id", "title", "price", "validation", "end_date", "description", "image", "fitness", "name",
                   "location"]
         read_only_fields = ["validation"]
 
