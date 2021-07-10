@@ -21,6 +21,7 @@ from .views import IndexView
 urlpatterns = [
     path("", IndexView.as_view()),
     path('admin/', admin.site.urls),
+    path("auth/", include("auth.urls")),
     path("locations/", include("location.urls")),
     path("categories/", include("category.urls")),
     path("fitnesses/", include("fitness.urls")),
