@@ -9,7 +9,8 @@ class MembershipSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Membership
-        fields = ["id", "price", "end_date", "description", "fitness", "fitness_name", "seller", "seller_nickname"]
+        fields = ["id", "title", "price", "end_date", "description", "fitness", "fitness_name", "seller",
+                  "seller_nickname"]
         read_only_fields = ["seller"]
 
 
@@ -18,5 +19,5 @@ class MyMembershipSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Membership
-        fields = ["id", "price", "validation", "end_date", "description", "fitness", "fitness_name"]
+        fields = ["id", "title", "price", "validation", "end_date", "description", "fitness", "fitness_name"]
         read_only_fields = ["validation"]
