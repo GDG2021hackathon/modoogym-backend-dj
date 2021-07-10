@@ -1,5 +1,6 @@
 import requests
 from django.conf import settings
+from django.contrib.auth.models import update_last_login
 from django.shortcuts import redirect
 from rest_framework import status
 from rest_framework.decorators import api_view
@@ -22,8 +23,8 @@ def login_by_social(email):
     return user
 
 
-def register_by_social(email):
-    user = User.objects.create_user(email=email)
+def register_by_social(email, nickname):
+    user = User.objects.create_user(email=email, nickname=nickname)
 
     return user
 
@@ -31,7 +32,8 @@ def register_by_social(email):
 def naver_login(request):
     naver_client_id = getattr(settings, 'NAVER_CLIENT_ID', None)
     redirect_uri = "http://localhost:8000/auth/naver/login/callback/"
-    print(f"https://nid.naver.com/oauth2.0/authorize?client_id={naver_client_id}&redirect_uri={redirect_uri}&response_type=code")
+    print(
+        f"https://nid.naver.com/oauth2.0/authorize?client_id={naver_client_id}&redirect_uri={redirect_uri}&response_type=code")
     return redirect(
         f"https://nid.naver.com/oauth2.0/authorize?client_id={naver_client_id}&redirect_uri={redirect_uri}&response_type=code"
     )
@@ -68,7 +70,10 @@ def naver_callback(request):
         try:
             user = login_by_social(email)
         except User.DoesNotExist:
-            user = register_by_social(email)
+            nickname = naver_account.get("nickname")
+            user = register_by_social(email, nickname)
+
+        update_last_login(None, user)
 
         token = create_token(user)
         headers = {"Token": token}
