@@ -20,7 +20,7 @@ class MembershipViewSet(viewsets.ModelViewSet):
     filterset_fields = ['fitness_id']
 
     def perform_create(self, serializer):
-        serializer.save(user=self.request.user)
+        serializer.save(seller=self.request.user)
 
     @action(detail=True, methods=['POST'])
     def buy(self, request, pk=None):
