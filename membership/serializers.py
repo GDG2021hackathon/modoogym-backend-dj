@@ -30,8 +30,9 @@ class MembershipSerializer(serializers.ModelSerializer):
 
 class MyMembershipSerializer(serializers.ModelSerializer):
     fitness_name = serializers.CharField(source="fitness.name", read_only=True)
+    region = serializers.CharField(source="fitness.location.region", read_only=True)
 
     class Meta:
         model = Membership
-        fields = ["id", "title", "price", "validation", "end_date", "description", "fitness", "fitness_name"]
+        fields = ["id", "title", "price", "validation", "end_date", "description", "fitness", "fitness_name", "region"]
         read_only_fields = ["validation"]
