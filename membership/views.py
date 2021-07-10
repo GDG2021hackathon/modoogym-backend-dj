@@ -56,7 +56,7 @@ class MembershipViewSet(viewsets.ModelViewSet):
         content = {
             "message": "결제가 성공적으로 이루어졌습니다."
         }
-        return Response(content, status=status.HTTP_409_CONFLICT)
+        return Response(content)
 
 
 class MyMembershipView(APIView):
