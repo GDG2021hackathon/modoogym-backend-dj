@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
-from .models import Membership
 from location.serializers import LocationSerializer
+from .models import Membership
 
 
 class MembershipSerializer(serializers.ModelSerializer):
@@ -32,8 +32,13 @@ class MembershipSerializer(serializers.ModelSerializer):
 class MyMembershipSerializer(serializers.ModelSerializer):
     fitness_name = serializers.CharField(source="fitness.name", read_only=True)
     location = LocationSerializer(source="fitness.location", read_only=True)
+    image = serializers.SerializerMethodField()
 
     class Meta:
         model = Membership
-        fields = ["id", "title", "price", "validation", "end_date", "description", "fitness", "fitness_name", "location"]
+        fields = ["id", "title", "price", "validation", "end_date", "description", "image", "fitness", "fitness_name",
+                  "location"]
         read_only_fields = ["validation"]
+
+    def get_image(self, membership):
+        return membership.fitness.sub_image
