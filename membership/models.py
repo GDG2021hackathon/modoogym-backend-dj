@@ -5,6 +5,7 @@ from user.models import User
 
 
 class Membership(models.Model):
+    title = models.CharField(max_length=50)
     price = models.IntegerField()
     validation = models.BooleanField(default=True)
     end_date = models.DateField()
