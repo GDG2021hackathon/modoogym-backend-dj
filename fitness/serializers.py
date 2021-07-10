@@ -9,11 +9,11 @@ from .models import Fitness
 class FitnessSerializer(serializers.ModelSerializer):
     category = CategorySerializer()
     location = LocationSerializer()
-    counts = serializers.SerializerMethodField(default=0)
+    count = serializers.SerializerMethodField(default=0)
 
     class Meta:
         model = Fitness
-        fields = ["id", "name", "score", "counts", "image", "navigation", "location", "category"]
+        fields = ["id", "name", "score", "count", "image", "navigation", "location", "category"]
 
-    def get_counts(self, fitness):
+    def get_count(self, fitness):
         return len(Membership.objects.filter(fitness=fitness, validation=True))
