@@ -20,7 +20,7 @@ class MembershipViewSet(viewsets.ModelViewSet):
     filterset_fields = ['fitness_id']
 
     def list(self, request, *args, **kwargs):
-        queryset = Membership.objects.filter(validation=True)
+        queryset = Membership.objects.filter(validation=True).exclude(seller=self.request.user)
 
         page = self.paginate_queryset(queryset)
         if page is not None:
